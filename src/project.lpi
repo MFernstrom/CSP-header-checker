@@ -12,6 +12,8 @@
       <UseXPManifest Value="True"/>
       <XPManifest>
         <DpiAware Value="True"/>
+        <TextName Value="MarcusFernstrom.Security.HeadersCheck"/>
+        <TextDesc Value="Analyzes security headers to help you implement best practices"/>
       </XPManifest>
       <Icon Value="0"/>
     </General>
@@ -52,7 +54,7 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="project"/>
+      <Filename Value="secure_headers_check"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
