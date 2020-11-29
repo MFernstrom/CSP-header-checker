@@ -1,5 +1,7 @@
-# SeurityHeaders
-Analyze security headers
+# Seurity Headers Checke
+Analyze security headers to see if you follow best practices
+
+Inspired by https://owasp.org/www-project-secure-headers/
 
 <img src="screenshot.png">
 
