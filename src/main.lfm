@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 249
+  Left = 380
   Height = 779
-  Top = 44
+  Top = 57
   Width = 1403
-  Caption = 'Secure Header Check'
+  Caption = 'Secure Headers Check'
   ClientHeight = 779
   ClientWidth = 1403
   OnCreate = FormCreate
@@ -20,6 +20,7 @@ object Form1: TForm1
         Width = 324
       end>
     ColumnClick = False
+    HideSelection = False
     Items.LazData = {
       680100000900000000000000FFFFFFFFFFFFFFFF000000001900000053747269
       63742D5472616E73706F72742D536563757269747900000000FFFFFFFFFFFFFF
@@ -69,6 +70,8 @@ object Form1: TForm1
         Width = 75
       end>
     ColumnClick = False
+    ReadOnly = True
+    RowSelect = True
     SmallImages = ImageList1
     TabOrder = 1
     ViewStyle = vsReport
@@ -82,7 +85,7 @@ object Form1: TForm1
     Font.Height = 24
     ParentFont = False
     TabOrder = 2
-    Text = 'https://www.serpworx.com/check-security-headers/'
+    TextHint = 'URL to analyze'
   end
   object GoButton: TBitBtn
     Left = 536

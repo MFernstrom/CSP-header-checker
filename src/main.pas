@@ -161,6 +161,8 @@ var
   header: THeader;
   headerKV: THeaderKeyVal;
 begin
+  if HeadersList.SelCount = 0 then exit;
+
   item := HeadersList.Selected;
 
   ResultsList.Clear;
