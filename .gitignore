@@ -1,0 +1,3 @@
+src/*.lps
+src/lib/*
+src/backup/*
