@@ -69,7 +69,7 @@ type
   end;
 
 const
-  version = '0.8';
+  version = '0.8.1';
 
 var
   Form1: TForm1;
@@ -109,6 +109,7 @@ var
 begin
   client := TFPHTTPClient.Create(nil);
   try
+    client.AllowRedirect := true;
     res := client.Get(url.Text);
     Raw.Text := format('%d %s' + Chr(10), [client.ResponseStatusCode, client.ResponseStatusText]);
     Raw.Append('Method: GET' + Chr(10) + Chr(10));
