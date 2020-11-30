@@ -1,7 +1,7 @@
 unit main;
 
 {
-  Version               0.8
+  Version               0.8.2
   URL                   https://github.com/MFernstrom/SeurityHeaders
   Author                Marcus Fernstrom
   Source code license   Apache 2.0
