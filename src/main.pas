@@ -110,7 +110,13 @@ begin
   client := TFPHTTPClient.Create(nil);
   try
     client.AllowRedirect := true;
-    res := client.Get(url.Text);
+    try
+      res := client.Get(url.Text);
+    except
+      Raw.Text := 'Request error' + Chr(10) + Chr(10);
+      Raw.Append(format('%d - %s' + Chr(10), [client.ResponseStatusCode, client.ResponseStatusText]));
+      Exit;
+    end;
     Raw.Text := format('%d %s' + Chr(10), [client.ResponseStatusCode, client.ResponseStatusText]);
     Raw.Append('Method: GET' + Chr(10) + Chr(10));
     Raw.Append(client.ResponseHeaders.Text);
