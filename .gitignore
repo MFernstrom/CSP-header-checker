@@ -2,4 +2,4 @@ backup/*
 src/*.lps
 src/lib/*
 src/backup/*
-src/*.exe
+src/bin/
