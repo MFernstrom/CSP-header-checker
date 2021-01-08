@@ -1,17 +1,17 @@
 object Form1: TForm1
-  Left = 224
-  Height = 953
-  Top = 12
-  Width = 1323
+  Left = 0
+  Height = 719
+  Top = 23
+  Width = 1280
   Caption = 'Security Headers Scanner'
-  ClientHeight = 953
-  ClientWidth = 1323
+  ClientHeight = 719
+  ClientWidth = 1280
   OnCreate = FormCreate
   LCLVersion = '2.0.10.0'
   object HeadersList: TListView
     AnchorSideTop.Control = ResultsList
     Left = 32
-    Height = 329
+    Height = 194
     Top = 288
     Width = 328
     Columns = <    
@@ -47,22 +47,22 @@ object Form1: TForm1
   object ResultsList: TListView
     AnchorSideBottom.Control = Splitter1
     Left = 384
-    Height = 339
+    Height = 184
     Top = 288
-    Width = 600
+    Width = 557
     Anchors = [akTop, akLeft, akRight, akBottom]
     Columns = <    
       item
         AutoSize = True
         Caption = 'Key'
         MinWidth = 70
-        Width = 34
+        Width = 100
       end    
       item
         AutoSize = True
         Caption = 'Value'
         MinWidth = 70
-        Width = 44
+        Width = 100
       end    
       item
         Caption = 'Description'
@@ -75,6 +75,7 @@ object Form1: TForm1
     SmallImages = ImageList1
     TabOrder = 1
     ViewStyle = vsReport
+    OnChange = ResultsListChange
   end
   object url: TEdit
     Left = 160
@@ -91,7 +92,7 @@ object Form1: TForm1
     Left = 664
     Height = 42
     Top = 16
-    Width = 103
+    Width = 97
     AutoSize = True
     Caption = 'Analyze'
     Glyph.Data = {
@@ -235,9 +236,9 @@ object Form1: TForm1
     AnchorSideRight.Control = ResultsList
     AnchorSideRight.Side = asrBottom
     Left = 384
-    Height = 294
-    Top = 637
-    Width = 600
+    Height = 215
+    Top = 482
+    Width = 557
     Anchors = [akTop, akLeft, akRight, akBottom]
     Lines.Strings = (
       'Raw response'
@@ -247,9 +248,9 @@ object Form1: TForm1
     WordWrap = False
   end
   object Image1: TImage
-    Left = 64
+    Left = 976
     Height = 248
-    Top = 683
+    Top = 16
     Width = 264
     Anchors = [akLeft, akBottom]
     Picture.Data = {
@@ -1525,8 +1526,8 @@ object Form1: TForm1
     Cursor = crVSplit
     Left = 384
     Height = 10
-    Top = 627
-    Width = 600
+    Top = 472
+    Width = 557
     Align = alNone
     Anchors = [akLeft, akRight]
     AutoSnap = False
@@ -1537,7 +1538,7 @@ object Form1: TForm1
     AnchorSideTop.Side = asrBottom
     Left = 216
     Height = 32
-    Top = 627
+    Top = 492
     Width = 32
     BorderSpacing.Top = 10
     Picture.Data = {
@@ -1646,9 +1647,9 @@ object Form1: TForm1
     AnchorSideTop.Control = HeadersList
     AnchorSideTop.Side = asrBottom
     Left = 128
-    Height = 15
-    Top = 635
-    Width = 39
+    Height = 16
+    Top = 500
+    Width = 46
     BorderSpacing.Top = 18
     Caption = 'Present'
     ParentColor = False
@@ -1657,20 +1658,20 @@ object Form1: TForm1
     AnchorSideTop.Control = HeadersList
     AnchorSideTop.Side = asrBottom
     Left = 256
-    Height = 15
-    Top = 635
-    Width = 62
+    Height = 16
+    Top = 500
+    Width = 72
     BorderSpacing.Top = 18
     Caption = 'Not present'
     ParentColor = False
   end
   object MethodSelector: TComboBox
     Left = 32
-    Height = 39
+    Height = 20
     Top = 16
     Width = 112
     Font.Height = 31
-    ItemHeight = 31
+    ItemHeight = 40
     ItemIndex = 1
     Items.Strings = (
       'GET'
@@ -1684,7 +1685,7 @@ object Form1: TForm1
   end
   object HeaderDescription: TLabel
     AnchorSideTop.Control = ResultsList
-    Left = 1016
+    Left = 973
     Height = 650
     Top = 288
     Width = 280
@@ -1698,7 +1699,7 @@ object Form1: TForm1
     AnchorSideTop.Side = asrBottom
     Left = 80
     Height = 32
-    Top = 627
+    Top = 492
     Width = 32
     BorderSpacing.Top = 10
     Picture.Data = {
@@ -1921,14 +1922,14 @@ object Form1: TForm1
     )
     ColWidths = (
       100
-      207
+      211
     )
   end
   object FormFieldLabel: TLabel
     Left = 384
-    Height = 15
+    Height = 16
     Top = 72
-    Width = 273
+    Width = 308
     Caption = 'Form values (application/x-www-form-urlencoded)'
     ParentColor = False
   end
@@ -1961,14 +1962,14 @@ object Form1: TForm1
     )
     ColWidths = (
       100
-      207
+      211
     )
   end
   object Label4: TLabel
     Left = 32
-    Height = 15
+    Height = 16
     Top = 72
-    Width = 86
+    Width = 99
     Caption = 'Custom headers'
     ParentColor = False
   end
@@ -1976,10 +1977,10 @@ object Form1: TForm1
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Cursor = crHandPoint
-    Left = 1301
-    Height = 37
+    Left = 1256
+    Height = 32
     Top = 0
-    Width = 12
+    Width = 14
     Anchors = [akTop, akRight]
     BorderSpacing.Right = 10
     Caption = '?'

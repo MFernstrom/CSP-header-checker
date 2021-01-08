@@ -65,6 +65,9 @@ type
     procedure HeadersListClick(Sender: TObject);
     procedure AddHeaderKV(header: Integer; needsValue: Boolean; key, description: String);
     procedure ResetHeaders;
+    procedure ResultsListChange(Sender: TObject; Item: TListItem;
+      Change: TItemChange);
+    procedure ResultsListClick(Sender: TObject);
     procedure SetupHeaders;
     procedure UpdateHeadersListIcons;
     procedure ResetHeadersListIcons;
@@ -92,6 +95,21 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
   SetupHeaders;
   Caption := Caption + ' ' + version;
+
+  // Platform dependant settings
+  {$IFDEF Darwin}
+    HeadersList.Height := 192;
+    url.Height := 22;
+    url.Font.Height := 0;
+    url.Font.Size := 0;
+    MethodSelector.Font.Height := 0;
+    MethodSelector.Font.Size := 0;
+  {$ELSE}
+    HeadersList.Height := 329;
+    url.Height := 39;
+    url.Font.Height := 24;
+    url.Font.Size := -18;
+  {$ENDIF}
 end;
 
 procedure TForm1.MethodSelectorChange(Sender: TObject);
@@ -269,6 +287,17 @@ begin
       Headers[i].data[v].value := '';
     end;
   end;
+end;
+
+procedure TForm1.ResultsListChange(Sender: TObject; Item: TListItem;
+  Change: TItemChange);
+begin
+  HeaderDescription.Caption := ResultsList.Selected.SubItems.ValueFromIndex[1]
+end;
+
+procedure TForm1.ResultsListClick(Sender: TObject);
+begin
+
 end;
 
 

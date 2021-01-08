@@ -14,7 +14,7 @@ uses
 
 begin
   RequireDerivedFormResource := True;
-  Application.Title := 'Secure Headers';
+  Application.Title:='Secure Headers';
   Application.Scaled := True;
   Application.Initialize;
   Application.CreateForm(TForm1, Form1);
