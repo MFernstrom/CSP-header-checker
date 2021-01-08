@@ -12,7 +12,7 @@
       <UseXPManifest Value="True"/>
       <XPManifest>
         <DpiAware Value="True"/>
-        <TextName Value="MarcusFernstrom.Security.HeadersCheck"/>
+        <TextName Value="MarcusFernstrom.Security.Headers.Scanner"/>
         <TextDesc Value="Analyzes security headers to help you implement best practices"/>
       </XPManifest>
       <Icon Value="0"/>
@@ -63,7 +63,7 @@
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="bin\$(TargetOS)\secure_headers_check"/>
+            <Filename Value="bin\$(TargetOS)\secure_headers_scanner"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
