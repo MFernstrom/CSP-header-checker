@@ -1,7 +1,7 @@
 unit main;
 
 {
-  Version               0.8.4
+  Version               0.8.5
   URL                   https://github.com/MFernstrom/SeurityHeaders
   Author                Marcus Fernstrom
   Source code license   Apache 2.0
@@ -14,8 +14,8 @@ unit main;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, ValEdit, ECLink,
-  fphttpclient, opensslsockets, StrUtils;
+  Classes, SysUtils, Forms, Controls, Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, ValEdit,
+  fphttpclient, opensslsockets, StrUtils, LCLIntf;
 
 type
   { THeaderKeyVal }
@@ -41,9 +41,9 @@ type
     CustomHeaders: TValueListEditor;
     HeaderDescription: TLabel;
     FormFieldLabel: TLabel;
+    Label3: TLabel;
     Label4: TLabel;
     MethodSelector: TComboBox;
-    ECLink1: TECLink;
     GoButton: TBitBtn;
     Image1: TImage;
     Image2: TImage;
@@ -57,6 +57,7 @@ type
     HeadersList: TListView;
     ResultsList: TListView;
     FormFieldEditor: TValueListEditor;
+    procedure Label3Click(Sender: TObject);
     procedure MethodSelectorChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
@@ -75,7 +76,7 @@ type
   end;
 
 const
-  version = '0.8.4';
+  version = '0.8.5';
 
 var
   Form1: TForm1;
@@ -102,6 +103,11 @@ begin
     FormFieldEditor.Visible := true;
     FormFieldLabel.Visible := true;
   end;
+end;
+
+procedure TForm1.Label3Click(Sender: TObject);
+begin
+  OpenURL('https://github.com/MFernstrom/SeurityHeaders');
 end;
 
 

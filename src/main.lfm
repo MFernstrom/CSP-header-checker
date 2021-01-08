@@ -67,7 +67,7 @@ object Form1: TForm1
       item
         Caption = 'Description'
         MinWidth = 100
-        Width = 75
+        Width = 100
       end>
     ColumnClick = False
     ReadOnly = True
@@ -1664,18 +1664,6 @@ object Form1: TForm1
     Caption = 'Not present'
     ParentColor = False
   end
-  object ECLink1: TECLink
-    Left = 1296
-    Height = 37
-    Top = 8
-    Width = 12
-    Anchors = [akTop, akRight]
-    Caption = '?'
-    Font.Height = -27
-    Link = 'https://github.com/MFernstrom/SeurityHeaders'
-    LinkType = eltWWW
-    ParentFont = False
-  end
   object MethodSelector: TComboBox
     Left = 32
     Height = 39
@@ -1983,6 +1971,22 @@ object Form1: TForm1
     Width = 86
     Caption = 'Custom headers'
     ParentColor = False
+  end
+  object Label3: TLabel
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Cursor = crHandPoint
+    Left = 1301
+    Height = 37
+    Top = 0
+    Width = 12
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 10
+    Caption = '?'
+    Font.Height = -27
+    ParentColor = False
+    ParentFont = False
+    OnClick = Label3Click
   end
   object ImageList1: TImageList
     Height = 32
