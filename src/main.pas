@@ -1,12 +1,12 @@
 unit main;
 
 {
-  Version               0.8.2
+  Version               0.8.4
   URL                   https://github.com/MFernstrom/SeurityHeaders
   Author                Marcus Fernstrom
   Source code license   Apache 2.0
-  Images license        Paid license from https://www.flaticon.com/packs/monster-emojis-2, if used, you need to follow
-                        the attribution license from the flaticon page or purchase your own.
+  Images license        Paid license from https://www.flaticon.com/packs/monster-emojis-2. If you use the image,
+                        you need to follow the attribution license from the flaticon page or purchase your own.
 }
 
 {$mode objfpc}{$H+}
@@ -14,7 +14,7 @@ unit main;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, ECLink,
+  Classes, SysUtils, Forms, Controls, Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, ValEdit, ECLink,
   fphttpclient, opensslsockets, StrUtils;
 
 type
@@ -38,10 +38,14 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    CustomHeaders: TValueListEditor;
+    HeaderDescription: TLabel;
+    FormFieldLabel: TLabel;
+    Label4: TLabel;
+    MethodSelector: TComboBox;
     ECLink1: TECLink;
     GoButton: TBitBtn;
     Image1: TImage;
-    HeaderDescription: TLabel;
     Image2: TImage;
     Image3: TImage;
     Label1: TLabel;
@@ -52,6 +56,8 @@ type
     ImageList1: TImageList;
     HeadersList: TListView;
     ResultsList: TListView;
+    FormFieldEditor: TValueListEditor;
+    procedure MethodSelectorChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure GoButtonClick(Sender: TObject);
     procedure AnalyzeUri;
@@ -69,7 +75,7 @@ type
   end;
 
 const
-  version = '0.8.2';
+  version = '0.8.4';
 
 var
   Form1: TForm1;
@@ -87,6 +93,17 @@ begin
   Caption := Caption + ' ' + version;
 end;
 
+procedure TForm1.MethodSelectorChange(Sender: TObject);
+begin
+  if MethodSelector.Text = 'GET' then begin
+    FormFieldEditor.Visible := false;
+    FormFieldLabel.Visible := false;
+  end else if MethodSelector.Text = 'POST' then begin
+    FormFieldEditor.Visible := true;
+    FormFieldLabel.Visible := true;
+  end;
+end;
+
 
 // Starts the analysis
 procedure TForm1.GoButtonClick(Sender: TObject);
@@ -101,26 +118,55 @@ end;
 // Perform HTTP request and analyze the response headers
 procedure TForm1.AnalyzeUri;
 var
-  client: tfphttpclient;
+  formFields: TStringList;
   res: String;
-  i,v, k, o: Integer;
+  client: tfphttpclient;
+  i,v, k, o, formFieldIndex: Integer;
   header: THeader;
-  headerName, headerVals, headerKVPair, headerKey, headerVal: String;
+  headerName, headerVals, headerKVPair, formFieldKey, formFieldVal: String;
+  headerKey, headerVal: String;
+
+
 begin
+  formFields := TStringList.Create;
   client := TFPHTTPClient.Create(nil);
   try
     client.AllowRedirect := true;
     try
-      res := client.Get(url.Text);
+      // Add custom headers to request
+      for i := 0 to CustomHeaders.RowCount -1 do begin
+        headerKey := CustomHeaders.Keys[i];
+        if Length(Trim(headerKey)) > 0 then begin
+          showmessage(headerKey);
+          headerVal := CustomHeaders.Strings.ValueFromIndex[i];
+          client.AddHeader(headerKey, headerVal);
+        end;
+      end;
+
+      if MethodSelector.Text = 'GET' then
+        res := client.Get(url.Text)
+      else begin
+        // Add custom form fields to request
+        for formFieldIndex := 0 to formFieldEditor.RowCount -1 do begin
+          formFieldKey := FormFieldEditor.Keys[formFieldIndex];
+          if Length(Trim(formFieldKey)) > 0 then begin
+            formFieldVal := FormFieldEditor.Strings.ValueFromIndex[formFieldIndex];
+            formFields.Values[formFieldKey] := formFieldVal;
+          end;
+        end;
+
+        res := client.FormPost(url.Text, formFields);
+      end;
     except
       Raw.Text := 'Request error' + Chr(10) + Chr(10);
       Raw.Append(format('%d - %s' + Chr(10), [client.ResponseStatusCode, client.ResponseStatusText]));
       Exit;
     end;
+
     Raw.Text := format('%d %s' + Chr(10), [client.ResponseStatusCode, client.ResponseStatusText]);
-    Raw.Append('Method: GET' + Chr(10) + Chr(10));
+    Raw.Append('Method: ' + MethodSelector.Text + Chr(10) + Chr(10));
     Raw.Append(client.ResponseHeaders.Text);
-    //Raw.Append(format(Chr(10) + '%s', [res]));
+    Raw.Append(format(Chr(10) + '%s', [res]));
 
     ResetHeaders;
     ResetHeadersListIcons;
@@ -138,12 +184,12 @@ begin
           for v := 1 to WordCount(headerVals, [';', ',']) do begin
             headerKVPair := ExtractWord(v, headerVals, [';', ',']);
             headerKVPair := Trim(headerKVPair);
-            headerKey := ExtractWord(1, headerKVPair, ['=', ' ']);
-            headerVal := ExtractRest(headerKVPair, ['=', ' ']);
+            formFieldKey := ExtractWord(1, headerKVPair, ['=', ' ']);
+            formFieldVal := ExtractRest(headerKVPair, ['=', ' ']);
 
             for k := 0 to length(header.data) -1 do begin
-              if headerKey = headers[o].data[k].key then begin
-                headers[o].data[k].value := headerVal;
+              if formFieldKey = headers[o].data[k].key then begin
+                headers[o].data[k].value := formFieldVal;
                 headers[o].data[k].present := true;
                 headers[o].present := true;
               end;
@@ -157,6 +203,7 @@ begin
     UpdateHeadersListIcons;
   finally
     client.Free;
+    formFields.Free;
   end;
 end;
 
