@@ -104,11 +104,13 @@ begin
     url.Font.Size := 0;
     MethodSelector.Font.Height := 0;
     MethodSelector.Font.Size := 0;
+    GoButton.Top := 5;
   {$ELSE}
     HeadersList.Height := 329;
     url.Height := 39;
     url.Font.Height := 24;
     url.Font.Size := -18;
+    GoButton.Top := 16;
   {$ENDIF}
 end;
 
