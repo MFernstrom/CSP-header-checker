@@ -12,8 +12,5 @@ You also get the http code and all raw headers in the bottom field
 
 Created with [Lazarus](https://www.lazarus-ide.org/)
 
-# Plans
-Check https://github.com/MFernstrom/SeurityHeaders/projects for details, but plans are to add options for POST requests with Form fields and File uploads.
-
 # Test
 During development I used `https://www.serpworx.com/check-security-headers/` to test, as they implement a number of headers.
